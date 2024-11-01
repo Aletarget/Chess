@@ -49,4 +49,26 @@ public class MovPeon {
         }
         return currentPostPeon;
     }
+
+    /*public List<int[]> moverPeon(Peon peon) {
+        List<int[]> posiblesMovimientos = new ArrayList<>();
+        int direccion = peon.getColor().equals("Blanco") ? -1 : 1;
+
+        // Movimiento de avance simple
+        posiblesMovimientos.add(new int[]{peon.getPos()[0] + direccion, peon.getPos()[1]});
+
+        // Movimiento de avance doble (solo si está en posición inicial)
+        if ((peon.getColor().equals("Blanco") && peon.getPos()[0] == 6) || 
+            (peon.getColor().equals("Negro") && peon.getPos()[0] == 1)) {
+            posiblesMovimientos.add(new int[]{peon.getPos()[0] + 2 * direccion, peon.getPos()[1]});
+        }
+
+        // Captura en diagonal derecha
+        posiblesMovimientos.add(new int[]{peon.getPos()[0] + direccion, peon.getPos()[1] + 1});
+
+        // Captura en diagonal izquierda
+        posiblesMovimientos.add(new int[]{peon.getPos()[0] + direccion, peon.getPos()[1] - 1});
+
+        return posiblesMovimientos;
+    }*/
 }
