@@ -6,5 +6,4 @@ public class Caballo extends Ficha{
     public Caballo(Equipo Color,int fila, int columna){
         super(Color, "Caballo", "", new int[]{fila,columna});
     }
-
 }
