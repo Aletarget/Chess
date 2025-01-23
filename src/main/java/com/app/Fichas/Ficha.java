@@ -16,16 +16,16 @@ public abstract class Ficha{
     }
 
     //SETTERS
-    public void setColor(Equipo color) {
+    private void setColor(Equipo color) {
         Color = color;
     }
-    public void setImg(String img) {
+    private void setImg(String img) {
         Img = img;
     }
-    public void setTipo(String tipo) {
+    private void setTipo(String tipo) {
         Tipo = tipo;
     }
-    public void setPos(int[] pos) {
+    private void setPos(int[] pos) {
         this.pos = pos;
     }
 

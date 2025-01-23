@@ -6,8 +6,7 @@ public class TableroJuego {
     private static TableroJuego instancia;
     private Ficha[][] tablero;
     private TableroJuego(){
-        tablero = new Ficha[8][8]; 
-        inicializarTablero(tablero);
+        tablero = new Ficha[8][8];
     }
 
 
@@ -19,11 +18,7 @@ public class TableroJuego {
         return instancia;
     }
 
-    //CREACION DEL TABLERO CON SUS FICHAS CORRESPODIENTE PARA CADA EQUIPO, INICIALIZANDO EL JUEG
-    private void inicializarTablero(Ficha[][] tablero){
-        /*AQUI VA TODA LA LOGICA EN DONDE SE INICIALIZA EL TABLERO, ES DECIR AQUI SE INICIALIZAN LAS POSISCIONES Y TAMBIEN SE ELIGEN LAS
-        IMAGENES DE LAS FICHAS*/
-    }
+
     public Ficha[][] getTablero(){
         return tablero;
     }
