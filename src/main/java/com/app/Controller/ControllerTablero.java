@@ -1,4 +1,4 @@
-package Controller;
+package com.app.Controller;
 import com.app.Tablero.TableroJuego;
 
 public class ControllerTablero {
