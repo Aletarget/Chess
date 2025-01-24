@@ -1,9 +1,7 @@
 package com.app.Controller;
 import java.util.ArrayList;
 
-import com.app.EquipoBridge.Equipo;
 import com.app.EquipoBridge.EquipoBlanco;
-import com.app.EquipoBridge.EquipoNegro;
 import com.app.Fichas.Alfil;
 import com.app.Fichas.Caballo;
 import com.app.Fichas.Ficha;
@@ -16,67 +14,50 @@ import com.app.Tablero.TableroJuego;
 public class ControllerTablero {
     public TableroJuego tablero;
     public ArrayList<Ficha> piezasEquipo;
+    public ArrayList<Ficha> piezasEquipoBlanco;
+    public ArrayList<Ficha> piezasEquipoNegro;
 
     public ControllerTablero() {
         tablero = tablero.getInstancia();
         piezasEquipo = new ArrayList<>();
+        piezasEquipoBlanco = new ArrayList<>();
+        piezasEquipoNegro = new ArrayList<>();
     }
 
-    public void equipo(Equipo Color, int fila, int columna, String pieza){
-        
-        // Agregar piezas al equipo según el color
-        for (int i = 0; i < columna; i++) {
-            piezasEquipo.add(new Peon(Color, fila, columna)); // Agregar 8 peones
+    public ArrayList<Ficha> fichasBlancas(EquipoBlanco equi_bl){
+        for(int i = 1 ; i <= 8; i++ ){
+            piezasEquipoBlanco.add(new Peon(equi_bl, 2, i));
         }
-        if (pieza.equals("Torre")) {
-            piezasEquipo.add(new Torre(Color, fila, columna)); 
-        }else if(pieza.equals("Caballo")){
-            piezasEquipo.add(new Caballo(Color, fila, columna));
-        }
-        else if(pieza.equals("Alfil")){
-            piezasEquipo.add(new Alfil(Color, fila, columna));  
-        }
-        else if(pieza.equals("Reina")){
-            piezasEquipo.add(new Reina(Color, fila, columna)); // Agregar 1 dama
-        }
-        else if(pieza.equals("Rey")){
-            piezasEquipo.add(new Rey(Color, fila, columna)); // Agregar 1 rey
-        }
+        piezasEquipoBlanco.add(new Torre(equi_bl, 1, 1)); 
+        piezasEquipoBlanco.add(new Torre(equi_bl, 1, 8)); 
+        piezasEquipoBlanco.add(new Caballo(equi_bl, 1, 2));
+        piezasEquipoBlanco.add(new Caballo(equi_bl, 1, 7));
+        piezasEquipoBlanco.add(new Alfil(equi_bl, 1, 3));
+        piezasEquipoBlanco.add(new Alfil(equi_bl, 1, 6));
+        piezasEquipoBlanco.add(new Reina(equi_bl, 1, 4));
+        piezasEquipoBlanco.add(new Rey(equi_bl, 1, 5)); 
 
+        return piezasEquipoBlanco;
+    }
+
+    public ArrayList<Ficha> fichasNegras(EquipoBlanco equi_ne){
+        for(int i = 1 ; i <= 8; i++ ){
+            piezasEquipoBlanco.add(new Peon(equi_ne, 7, i));
+        }
+        piezasEquipoNegro.add(new Torre(equi_ne, 8, 1)); 
+        piezasEquipoNegro.add(new Torre(equi_ne, 8, 8)); 
+        piezasEquipoNegro.add(new Caballo(equi_ne, 8, 2));
+        piezasEquipoNegro.add(new Caballo(equi_ne, 8, 7));
+        piezasEquipoNegro.add(new Alfil(equi_ne, 8, 3));
+        piezasEquipoNegro.add(new Alfil(equi_ne, 8, 6));
+        piezasEquipoNegro.add(new Reina(equi_ne, 8, 4));
+        piezasEquipoNegro.add(new Rey(equi_ne, 8, 5)); 
+
+        return piezasEquipoNegro;
     }
 
     public void seleccionEquipo(String equipo){
-        if (equipo.equals("Blanco")){
-            EquipoBlanco eq_blanco = new EquipoBlanco();
-            
-            equipo(eq_blanco, 2, 8, "Peon");
-            for(int i = 1; i == 8 ; i++){
-                equipo(eq_blanco, 1, i, "Torre");    
-            }
-            for(int i = 2; i == 7 ; i++){
-                equipo(eq_blanco, 1, i, "Caballo");    
-            }
-            for(int i = 3; i == 6 ; i++){
-                equipo(eq_blanco, 1, i, "Alfil");    
-            }
-            equipo(eq_blanco, 1, 5, "Reina");
-            equipo(eq_blanco, 1, 4, "Rey");
-        }else if (equipo.equals("Negro")){
-            EquipoNegro eq_negro = new EquipoNegro();
-
-            equipo(eq_negro, 7, 8, "Peon");
-            for(int i = 1; i == 8 ; i++){
-                equipo(eq_negro, 8, i, "Torre");    
-            }
-            for(int i = 2; i == 7 ; i++){
-                equipo(eq_negro, 8, i, "Caballo");    
-            }
-            for(int i = 3; i == 6 ; i++){
-                equipo(eq_negro, 8, i, "Alfil");    
-            }
-            equipo(eq_negro, 8, 5, "Reina");
-            equipo(eq_negro, 8, 4, "Rey");
-        }
+        
     }
     
     public void iniciarJuego(){
