@@ -15,10 +15,11 @@ import com.app.Tablero.TableroJuego;
 
 public class ControllerTablero {
     public TableroJuego tablero;
-    ArrayList<Ficha> piezasEquipo = new ArrayList<>(); // Inicializar la lista de piezas
+    public ArrayList<Ficha> piezasEquipo;
 
     public ControllerTablero() {
         tablero = tablero.getInstancia();
+        piezasEquipo = new ArrayList<>();
     }
 
     public void equipo(Equipo Color, int fila, int columna, String pieza){
@@ -76,6 +77,6 @@ public class ControllerTablero {
             equipo(eq_negro, 8, 5, "Reina");
             equipo(eq_negro, 8, 4, "Rey");
         }
-    }
+    }           
 
 }
