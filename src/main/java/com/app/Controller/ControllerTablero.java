@@ -2,6 +2,7 @@ package com.app.Controller;
 import java.util.ArrayList;
 
 import com.app.EquipoBridge.EquipoBlanco;
+import com.app.EquipoBridge.EquipoNegro;
 import com.app.Fichas.Alfil;
 import com.app.Fichas.Caballo;
 import com.app.Fichas.Ficha;
@@ -24,7 +25,8 @@ public class ControllerTablero {
         piezasEquipoNegro = new ArrayList<>();
     }
 
-    public ArrayList<Ficha> fichasBlancas(EquipoBlanco equi_bl){
+    public ArrayList<Ficha> fichasBlancas(){
+        EquipoBlanco equi_bl = new EquipoBlanco();
         for(int i = 1 ; i <= 8; i++ ){
             piezasEquipoBlanco.add(new Peon(equi_bl, 2, i));
         }
@@ -40,7 +42,8 @@ public class ControllerTablero {
         return piezasEquipoBlanco;
     }
 
-    public ArrayList<Ficha> fichasNegras(EquipoBlanco equi_ne){
+    public ArrayList<Ficha> fichasNegras(){
+        EquipoNegro equi_ne = new EquipoNegro();
         for(int i = 1 ; i <= 8; i++ ){
             piezasEquipoBlanco.add(new Peon(equi_ne, 7, i));
         }
@@ -57,53 +60,49 @@ public class ControllerTablero {
     }
 
     public void seleccionEquipo(String equipo){
-        
+        if(equipo.equals("Blanco")){
+            fichasBlancas();
+        }else if(equipo.equals("Negro")){
+            fichasNegras();
+        }
+    }
+
+    public void colocarFicha(int fila, int columna, Ficha ficha) {
+        if (fila < 1 || fila > 8 || columna < 1 || columna > 8) {
+            System.out.println("Posición inválida: (" + fila + ", " + columna + ")");
+            return;
+        }
+
+        tablero.getTablero()[fila - 1][columna - 1] = ficha; // Restar 1 porque las matrices comienzan en 0
+        System.out.println("Colocando " + ficha.getClass().getSimpleName() + " de color " + ficha.getColor() +
+                           " en la posición (" + fila + ", " + columna + ")");
     }
     
     public void iniciarJuego(){
-        // Verificar que el tablero no es nulo
-        if (tablero != null) {
-            System.out.println("El tablero ha sido inicializado correctamente.");
-        } else {
-            System.out.println("Error: El tablero no fue inicializado.");
-        }
+    
+        // Inicializar las piezas de ambos equipos
+        piezasEquipoBlanco = fichasBlancas();
+        piezasEquipoNegro = fichasNegras();
+    
+        // Agregar las piezas blancas al tablero
+    for (Ficha ficha : piezasEquipoBlanco) {
+        colocarFicha(ficha.getPos()[0], ficha.getPos()[1], ficha);
+    }
 
-        // Configurar el equipo Blanco
-        seleccionEquipo("Blanco");
-
-        // Verificar que las piezas del equipo Blanco han sido agregadas
-        if (piezasEquipo.isEmpty()) {
-            System.out.println("Error: No se inicializaron las piezas del equipo Blanco.");
-        } else {
-            System.out.println("Piezas del equipo Blanco inicializadas:");
-            for (Ficha ficha : piezasEquipo) {
-                System.out.println(
-                    ficha.getClass().getSimpleName() + 
-                    " en posición (" + ficha.getPos()[0] + ", " + ficha.getPos()[1] + 
-                    ") - Color: " + ficha.getColor()
-                );
-            }
-        }
-
-        // Limpiar la lista de piezas para el siguiente test
+    // Agregar las piezas negras al tablero
+    for (Ficha ficha : piezasEquipoNegro) {
+        colocarFicha(ficha.getPos()[0], ficha.getPos()[1], ficha);
+    }
+    
+        // Unir ambas listas en piezasEquipo
         piezasEquipo.clear();
-
-        // Configurar el equipo Negro
-        seleccionEquipo("Negro");
-
-        // Verificar que las piezas del equipo Negro han sido agregadas
-        if (piezasEquipo.isEmpty()) {
-            System.out.println("Error: No se inicializaron las piezas del equipo Negro.");
-        } else {
-            System.out.println("Piezas del equipo Negro inicializadas:");
-            for (Ficha ficha : piezasEquipo) {
-                System.out.println(
-                    ficha.getClass().getSimpleName() + 
-                    " en posición (" + ficha.getPos()[0] + ", " + ficha.getPos()[1] + 
-                    ") - Color: " + ficha.getColor()
-                );
-            }
-        }
+        piezasEquipo.addAll(piezasEquipoBlanco);
+        piezasEquipo.addAll(piezasEquipoNegro);
+    
+        // Configuración inicial adicional (si aplica)
+        System.out.println("El juego ha iniciado. ¡Buena suerte!");
+    
+    
     }
 
 }
