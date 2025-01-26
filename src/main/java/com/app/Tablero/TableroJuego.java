@@ -1,12 +1,12 @@
 package com.app.Tablero;
 
-import com.app.Fichas.Ficha;
+import com.app.Controller.Casilla;
 
 public class TableroJuego {
     private static TableroJuego instancia;
-    private Ficha[][] tablero;
+    private Casilla[][] tablero;
     private TableroJuego(){
-        tablero = new Ficha[8][8];
+        tablero = new Casilla[8][8];
     }
 
 
@@ -19,7 +19,7 @@ public class TableroJuego {
     }
 
 
-    public Ficha[][] getTablero(){
+    public Casilla[][] getTablero(){
         return tablero;
     }
 }
