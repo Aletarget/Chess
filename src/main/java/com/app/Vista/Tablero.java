@@ -6,11 +6,9 @@ import java.awt.GridLayout;
 
 import javax.swing.JPanel;
 
-import com.app.Fichas.Ficha;
 import com.app.Tablero.TableroJuego;
 
 public class Tablero extends JPanel {
-    private Ficha[][] fichas;
     private TableroJuego tableroJuego;
     public Tablero(){
         setLayout(new GridLayout(8, 8));
@@ -35,7 +33,6 @@ public class Tablero extends JPanel {
         }
 
         tableroJuego = TableroJuego.getInstancia();
-        fichas = tableroJuego.getTablero();
 
         //Con esta anidacion de ciclos for lo que hacemos es asignarle a cada posicion de {fila,columna} al gridLayout
         for(int fila = 0;fila<8;fila++){
