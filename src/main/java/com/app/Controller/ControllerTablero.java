@@ -82,34 +82,35 @@ public class ControllerTablero {
         }
         Casilla casilla = new Casilla(ficha);
 
-        tablero.getTablero()[fila - 1][columna - 1] = casilla; // Restar 1 porque las matrices comienzan en 0
+        tablero.setCasillaInTablero(casilla,(fila-1),(columna-1)); // Restar 1 porque las matrices comienzan en 0
         System.out.println("Colocando " + ficha.getClass().getSimpleName() + " de color " + ficha.getColor() +
                            " en la posición (" + fila + ", " + columna + ")");
     }
     
-    public void iniciarJuego(){
+    public TableroJuego iniciarJuego(){
     
         // Inicializar las piezas de ambos equipos
         piezasEquipoBlanco = fichasBlancas();
         piezasEquipoNegro = fichasNegras();
     
         // Agregar las piezas blancas al tablero
-    for (Casilla ficha : piezasEquipoBlanco) {
-        colocarFicha(ficha.getCasilla().getPos()[0], ficha.getCasilla().getPos()[1], ficha.getCasilla());
-    }
+        for (Casilla ficha : piezasEquipoBlanco) {
+            colocarFicha(ficha.getCasilla().getPos()[0], ficha.getCasilla().getPos()[1], ficha.getCasilla());
+        }
 
-    // Agregar las piezas negras al tablero
-    for (Casilla ficha : piezasEquipoNegro) {
-        colocarFicha(ficha.getCasilla().getPos()[0], ficha.getCasilla().getPos()[1], ficha.getCasilla());
-    }
+        // Agregar las piezas negras al tablero
+        for (Casilla ficha : piezasEquipoNegro) {
+            colocarFicha(ficha.getCasilla().getPos()[0], ficha.getCasilla().getPos()[1], ficha.getCasilla());
+        }
     
         // Unir ambas listas en piezasEquipo
         piezasEquipo.clear();
         piezasEquipo.addAll(piezasEquipoBlanco);
         piezasEquipo.addAll(piezasEquipoNegro);
-    
-        // Configuración inicial adicional (si aplica)
         System.out.println("El juego ha iniciado. ¡Buena suerte!");
+    
+        return tablero; //Necesario para mostrarlo en pantalla.
+        // Configuración inicial adicional (si aplica)
     }
 
     public boolean moverFicha(Casilla fichaElegida, Casilla destino){
