@@ -4,6 +4,6 @@ import com.app.EquipoBridge.Equipo;
 
 public class Reina extends Ficha{
     public Reina(Equipo Color, int fila, int columna){
-        super(Color, "Reina", "", new int[]{fila,columna});
+        super(Color, "Reina", Color.getDirImg("Reina"), new int[]{fila,columna});
     }
 }

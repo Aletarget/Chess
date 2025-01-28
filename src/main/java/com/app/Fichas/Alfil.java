@@ -4,6 +4,6 @@ import com.app.EquipoBridge.Equipo;
 
 public class Alfil extends Ficha{
     public Alfil(Equipo Color,int fila, int columna){
-        super(Color, "Alfil", "", new int[]{fila,columna});
+        super(Color, "Alfil", Color.getDirImg("Alfil"), new int[]{fila,columna});
     }
 }
