@@ -22,4 +22,7 @@ public class TableroJuego {
     public Casilla[][] getTablero(){
         return tablero;
     }
+    public void setCasillaInTablero(Casilla casilla, int fila, int columna){
+        tablero[fila][columna] = casilla;
+    }
 }
