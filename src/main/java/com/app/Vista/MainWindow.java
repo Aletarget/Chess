@@ -41,6 +41,7 @@ public class MainWindow extends JFrame {
         };
 
         tablero = new Tablero();
+        tablero.setAlignmentY(CENTER_ALIGNMENT);
         // Crear un panel envolvente para que no se estire
         panelCentral.setLayout(new BoxLayout(panelCentral, BoxLayout.Y_AXIS));
         panelCentral.add(Box.createVerticalGlue());
