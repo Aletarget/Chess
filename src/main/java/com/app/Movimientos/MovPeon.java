@@ -1,9 +1,12 @@
 package com.app.Movimientos;
 
-import com.app.Fichas.Peon;
+import java.util.ArrayList;
+import java.util.List;
 
-public class MovPeon {
-    public int[] avanzar(Peon peon){
+import com.app.Fichas.Ficha;
+
+public class MovPeon implements Movimientos{
+    /*public int[] avanzar(Ficha ficha){
         int[] currentPostPeon = peon.getPos();
         if (peon.getColor().equals("Blanco")) {
             currentPostPeon[0] -= 1;
@@ -48,27 +51,27 @@ public class MovPeon {
             currentPostPeon[1] -= 1;            
         }
         return currentPostPeon;
-    }
-
-    /*public List<int[]> moverPeon(Peon peon) {
+    }*/
+    @Override
+    public List<int[]> movimiento(Ficha ficha) {
         List<int[]> posiblesMovimientos = new ArrayList<>();
-        int direccion = peon.getColor().equals("Blanco") ? -1 : 1;
+        int direccion = ficha.getColor().equals("Blanco") ? -1 : 1;
 
         // Movimiento de avance simple
-        posiblesMovimientos.add(new int[]{peon.getPos()[0] + direccion, peon.getPos()[1]});
+        posiblesMovimientos.add(new int[]{ficha.getPos()[0] + direccion, ficha.getPos()[1]});
 
         // Movimiento de avance doble (solo si está en posición inicial)
-        if ((peon.getColor().equals("Blanco") && peon.getPos()[0] == 6) || 
-            (peon.getColor().equals("Negro") && peon.getPos()[0] == 1)) {
-            posiblesMovimientos.add(new int[]{peon.getPos()[0] + 2 * direccion, peon.getPos()[1]});
+        if ((ficha.getColor().equals("Blanco") && ficha.getPos()[0] == 6) || 
+            (ficha.getColor().equals("Negro") && ficha.getPos()[0] == 1)) {
+            posiblesMovimientos.add(new int[]{ficha.getPos()[0] + 2 * direccion, ficha.getPos()[1]});
         }
 
         // Captura en diagonal derecha
-        posiblesMovimientos.add(new int[]{peon.getPos()[0] + direccion, peon.getPos()[1] + 1});
+        posiblesMovimientos.add(new int[]{ficha.getPos()[0] + direccion, ficha.getPos()[1] + 1});
 
         // Captura en diagonal izquierda
-        posiblesMovimientos.add(new int[]{peon.getPos()[0] + direccion, peon.getPos()[1] - 1});
+        posiblesMovimientos.add(new int[]{ficha.getPos()[0] + direccion, ficha.getPos()[1] - 1});
 
         return posiblesMovimientos;
-    }*/
+    }
 }

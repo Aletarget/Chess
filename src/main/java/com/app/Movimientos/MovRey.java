@@ -3,10 +3,11 @@ package com.app.Movimientos;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.app.Fichas.Rey;
+import com.app.Fichas.Ficha;
 
-public class MovRey {
-    public List<int[]> moverRey(Rey rey) {
+public class MovRey implements Movimientos{
+    @Override
+    public List<int[]> movimiento(Ficha ficha) {
         List<int[]> posiblesMovimientos = new ArrayList<>();
         int[][] direcciones = {
             {1, 0}, {-1, 0}, {0, 1}, {0, -1},
@@ -15,8 +16,8 @@ public class MovRey {
         
         for (int[] direccion : direcciones) {
             int[] nuevaPos = {
-                rey.getPos()[0] + direccion[0],
-                rey.getPos()[1] + direccion[1]
+                ficha.getPos()[0] + direccion[0],
+                ficha.getPos()[1] + direccion[1]
             };
             // Verificar que la nueva posición esté dentro de los límites del tablero
             if (nuevaPos[0] >= 0 && nuevaPos[0] < 8 && nuevaPos[1] >= 0 && nuevaPos[1] < 8) {

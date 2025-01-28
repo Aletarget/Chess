@@ -3,30 +3,31 @@ package com.app.Movimientos;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.app.Fichas.Caballo;
+import com.app.Fichas.Ficha;
 
-public class MovCaballo {
-
-    public List<int[]> moverCaballo(Caballo caballo) {
-    int[] currentPosCaballo = caballo.getPos();
-    List<int[]> posiblesMovimientos = new ArrayList<>();
+public class MovCaballo implements Movimientos{
     
-    // Lista de posibles movimientos
-    int[][] movimientos = {
-        {2, 1}, {2, -1}, {-2, 1}, {-2, -1},
-        {1, 2}, {1, -2}, {-1, 2}, {-1, -2}
-    };
-    
-    // Generar todas las posiciones posibles basadas en los movimientos
-    for (int[] movimiento : movimientos) {
-        int[] nuevaPos = {
-            currentPosCaballo[0] + movimiento[0],
-            currentPosCaballo[1] + movimiento[1]
+    @Override
+    public List<int[]> movimiento(Ficha ficha) {
+        int[] currentPosCaballo = ficha.getPos();
+        List<int[]> posiblesMovimientos = new ArrayList<>();
+        
+        // Lista de posibles movimientos
+        int[][] movimientos = {
+            {2, 1}, {2, -1}, {-2, 1}, {-2, -1},
+            {1, 2}, {1, -2}, {-1, 2}, {-1, -2}
         };
-        posiblesMovimientos.add(nuevaPos);
+        
+        // Generar todas las posiciones posibles basadas en los movimientos
+        for (int[] movimiento : movimientos) {
+            int[] nuevaPos = {
+                currentPosCaballo[0] + movimiento[0],
+                currentPosCaballo[1] + movimiento[1]
+            };
+            posiblesMovimientos.add(nuevaPos);
+        }
+        
+        return posiblesMovimientos;
     }
-    
-    return posiblesMovimientos;
-}
 
 }
