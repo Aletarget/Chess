@@ -9,4 +9,7 @@ public class EquipoNegro implements Equipo {
     public String getEquipo() {
         return "Negro";
     }
+    public String getDirImg(String ficha){
+        return "../Images/Negras/"+ficha+"-negro.png";
+    }
 }
