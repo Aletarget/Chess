@@ -20,13 +20,13 @@ import com.app.Movimientos.Movimientos;
 import com.app.Tablero.TableroJuego;
 
 public class ControllerTablero {
-    public TableroJuego tablero;
+    public TableroJuego tableroInstancia;
     public Casilla[][] piezasEquipo;
     public Casilla[][] piezasEquipoBlanco;
     public Casilla[][] piezasEquipoNegro;
 
     public ControllerTablero() {
-        this.tablero = TableroJuego.getInstancia();
+        this.tableroInstancia = TableroJuego.getInstancia();
         piezasEquipo = new Casilla[9][9];
         piezasEquipoBlanco = new Casilla[9][9];
         piezasEquipoNegro = new Casilla[9][9];
@@ -84,7 +84,7 @@ public class ControllerTablero {
         }
         Casilla casilla = new Casilla(ficha);
 
-        tablero.setCasillaInTablero(casilla,(fila-1),(columna-1)); // Restar 1 porque las matrices comienzan en 0
+        tableroInstancia.setCasillaInTablero(casilla,(fila-1),(columna-1)); // Restar 1 porque las matrices comienzan en 0
         System.out.println("Colocando " + ficha.getClass().getSimpleName() + " de color " + ficha.getColor() +
                            " en la posición (" + fila + ", " + columna + ")");
     }
@@ -94,6 +94,13 @@ public class ControllerTablero {
         // Inicializar las piezas de ambos equipos
         Casilla[][] piezasEquipoBlanco = fichasBlancas();
         Casilla[][] piezasEquipoNegro = fichasNegras();
+
+        // Inicializar el tablero con null en todas las posiciones
+    for (int i = 1; i < 9; i++) {
+        for (int j = 1; j < 9; j++) {
+            tableroInstancia.setCasillaInTablero(null, i-1, j-1);
+        }
+    }
     
         // Agregar las piezas blancas al tablero
         for (int i = 1; i < 3; i++) {
@@ -113,7 +120,7 @@ public class ControllerTablero {
 
         System.out.println("El juego ha iniciado. ¡Buena suerte!");
     
-        return tablero; //Necesario para mostrarlo en pantalla.
+        return tableroInstancia; //Necesario para mostrarlo en pantalla.
         // Configuración inicial adicional (si aplica)
     }
 
