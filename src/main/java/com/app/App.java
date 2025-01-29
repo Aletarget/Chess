@@ -2,7 +2,6 @@ package com.app;
 
 import javax.swing.SwingUtilities;
 
-import com.app.Controller.ControllerTablero;
 import com.app.Vista.MainWindow;
 
 /**
@@ -22,10 +21,14 @@ public class App
 
         });
 
-        // Crear instancia de ControllerTablero
+        /* Crear instancia de ControllerTablero
         ControllerTablero controller = new ControllerTablero();
+        
         
         controller.iniciarJuego();
 
+        ArrayList<Casilla> piezas = controller.getPiezasEquipo();
+        
+        System.out.println(controller.moverFicha(piezas.get(1), piezas.get(9)));*/
     }
 }
