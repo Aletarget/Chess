@@ -35,16 +35,16 @@ public class ControllerTablero {
     public Casilla[][] fichasBlancas(){
         EquipoBlanco equi_bl = new EquipoBlanco();
         for(int i = 1 ; i < 9; i++ ){
-            piezasEquipoBlanco[2][i] = new Casilla(new Peon(equi_bl,2,i));
+            piezasEquipoBlanco[7][i] = new Casilla(new Peon(equi_bl,7,i));
         }
-        piezasEquipoBlanco[1][1] = new Casilla(new Torre(equi_bl,1,1));
-        piezasEquipoBlanco[1][8] = new Casilla(new Torre(equi_bl,1,8));
-        piezasEquipoBlanco[1][2] = new Casilla(new Caballo(equi_bl,1,2));
-        piezasEquipoBlanco[1][7] = new Casilla(new Caballo(equi_bl,1,7));
-        piezasEquipoBlanco[1][3] = new Casilla(new Alfil(equi_bl,1,3));
-        piezasEquipoBlanco[1][6] = new Casilla(new Alfil(equi_bl,1,6));
-        piezasEquipoBlanco[1][4] = new Casilla(new Reina(equi_bl,1,4));
-        piezasEquipoBlanco[1][5] = new Casilla(new Rey(equi_bl,1,5));
+        piezasEquipoBlanco[8][1] = new Casilla(new Torre(equi_bl,8,1));
+        piezasEquipoBlanco[8][8] = new Casilla(new Torre(equi_bl,8,8));
+        piezasEquipoBlanco[8][2] = new Casilla(new Caballo(equi_bl,8,2));
+        piezasEquipoBlanco[8][7] = new Casilla(new Caballo(equi_bl,8,7));
+        piezasEquipoBlanco[8][3] = new Casilla(new Alfil(equi_bl,8,3));
+        piezasEquipoBlanco[8][6] = new Casilla(new Alfil(equi_bl,8,6));
+        piezasEquipoBlanco[8][4] = new Casilla(new Reina(equi_bl,8,4));
+        piezasEquipoBlanco[8][5] = new Casilla(new Rey(equi_bl,8,5));
         
 
         return piezasEquipoBlanco;
@@ -54,16 +54,16 @@ public class ControllerTablero {
         EquipoNegro equi_ne = new EquipoNegro();
 
         for(int i = 1 ; i < 9; i++ ){
-            piezasEquipoBlanco[7][i] = new Casilla(new Peon(equi_ne,7,i));
+            piezasEquipoNegro[2][i] = new Casilla(new Peon(equi_ne,2,i));
         }
-        piezasEquipoNegro[8][1] = new Casilla(new Torre(equi_ne,8,1));
-        piezasEquipoNegro[8][8] = new Casilla(new Torre(equi_ne,8,8));
-        piezasEquipoNegro[8][2] = new Casilla(new Caballo(equi_ne,8,2));
-        piezasEquipoNegro[8][7] = new Casilla(new Caballo(equi_ne,8,7));
-        piezasEquipoNegro[8][3] = new Casilla(new Alfil(equi_ne,8,3));
-        piezasEquipoNegro[8][6] = new Casilla(new Alfil(equi_ne,8,6));
-        piezasEquipoNegro[8][4] = new Casilla(new Reina(equi_ne,8,4));
-        piezasEquipoNegro[8][5] = new Casilla(new Rey(equi_ne,8,5));
+        piezasEquipoNegro[1][1] = new Casilla(new Torre(equi_ne,1,1));
+        piezasEquipoNegro[1][8] = new Casilla(new Torre(equi_ne,1,8));
+        piezasEquipoNegro[1][2] = new Casilla(new Caballo(equi_ne,1,2));
+        piezasEquipoNegro[1][7] = new Casilla(new Caballo(equi_ne,1,7));
+        piezasEquipoNegro[1][3] = new Casilla(new Alfil(equi_ne,1,3));
+        piezasEquipoNegro[1][6] = new Casilla(new Alfil(equi_ne,1,6));
+        piezasEquipoNegro[1][4] = new Casilla(new Reina(equi_ne,1,4));
+        piezasEquipoNegro[1][5] = new Casilla(new Rey(equi_ne,1,5));
 
 
         return piezasEquipoNegro;
@@ -98,23 +98,24 @@ public class ControllerTablero {
         // Inicializar el tablero con null en todas las posiciones
     for (int i = 1; i < 9; i++) {
         for (int j = 1; j < 9; j++) {
-            tableroInstancia.setCasillaInTablero(null, i-1, j-1);
+            tableroInstancia.setCasillaInTablero(new Casilla(null), i-1, j-1);
         }
     }
     
         // Agregar las piezas blancas al tablero
         for (int i = 1; i < 3; i++) {
             for (int j = 1; j < 9; j++) {
-                Casilla pieza = piezasEquipoBlanco[i][j];
-                colocarFicha(pieza.getCasilla().getPos()[0],pieza.getCasilla().getPos()[1],pieza.getCasilla());    
+                Casilla pieza = piezasEquipoNegro[i][j];
+                System.out.println(pieza.getCasilla().getImg());
+                colocarFicha(pieza.getCasilla().getPos()[0],pieza.getCasilla().getPos()[1],pieza.getCasilla());
             }
         }
 
         // Agregar las piezas negras al tablero
-        for (int i = 8; i > 7; i--) {
+        for (int i = 8; i >= 7; i--) {
             for (int j = 1; j < 9; j++) {
-                Casilla pieza = piezasEquipoNegro[i][j];
-                colocarFicha(pieza.getCasilla().getPos()[0],pieza.getCasilla().getPos()[1],pieza.getCasilla());    
+                Casilla pieza = piezasEquipoBlanco[i][j];
+                colocarFicha(pieza.getCasilla().getPos()[0],pieza.getCasilla().getPos()[1],pieza.getCasilla()); 
             }
         }
 
