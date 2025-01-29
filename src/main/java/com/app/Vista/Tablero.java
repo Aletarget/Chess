@@ -25,8 +25,13 @@ public class Tablero extends JPanel {
         Color lightColor = new Color(253, 235, 208);
         Color darkColor = new Color(76,195,105);
 
+        /*  DE EXTREMA IMPORTANCIA LAS SIGUIENTES DECLARACIONES CONTROLLER Y TALBEROJUEGO, APARTIR DE ESTOS DOS OBJETOS 
+        DEPENDERA LA PARTE GRAFICA Y LA COMUNICACION CON LA VALIDACION DE TODOS LOS MOVIMIENTOS
+        */
         controller = new ControllerTablero();
         tableroJuego = controller.iniciarJuego();
+
+        // Test para la implemntacion de las casillas de forma grafica
         image = new ImageIcon(getClass().getResource(tableroJuego.getTablero()[0][7].getCasilla().getImg()));
         imagen = new JButton[8][8];
         imagen[0][7] = new JButton();
