@@ -21,7 +21,7 @@ public class Tablero extends JPanel {
     private JButton[][] imagen;
     private Boolean selec = false;
     private Ficha fichaOrigen;
-    private Ficha fichaDestino;
+    private Casilla fichaDestino;
     private JButton currentSelect;
     public Tablero(){
         setLayout(new GridLayout(8, 8));
@@ -64,11 +64,11 @@ public class Tablero extends JPanel {
                             }else{
                                 System.out.println("Intentando mover " + fichaOrigen + " a fila " + fila + ", columna " + columna);
 
-                                fichaDestino = botonElegido.getCasilla();
+                                fichaDestino = botonElegido;
                                 boolean validacion = controller.moverFicha(fichaOrigen, fichaDestino);
 
                                 if(validacion){
-                                    fichaOrigen = fichaDestino;
+                                    fichaOrigen = fichaDestino.getCasilla();
                                     System.out.println("el movimiento se ha hecho");
                                 }else{
                                     System.out.println("El movimiento no ha sido elegido dentro de las posibilidades");

@@ -122,7 +122,7 @@ public class ControllerTablero {
         return tableroInstancia;
     }
 
-    public boolean moverFicha(Ficha fichaElegida, Ficha destino){
+    public boolean moverFicha(Ficha fichaElegida, Casilla destino){
 
         Ficha ficha = fichaElegida;
 
@@ -134,9 +134,7 @@ public class ControllerTablero {
 
         // Validar que las coordenadas estén dentro del tablero
         if (fichaElegida.getPos()[0] < 1 || fichaElegida.getPos()[0] > 8 || 
-            fichaElegida.getPos()[1] < 1 || fichaElegida.getPos()[1] > 8 ||
-            destino.getPos()[0] < 1 || destino.getPos()[0] > 8 ||
-            destino.getPos()[1] < 1 || destino.getPos()[1] > 8) {
+            fichaElegida.getPos()[1] < 1 || fichaElegida.getPos()[1] > 8) {
             System.out.println("Movimiento fuera de los límites del tablero.");
             return false;
         }
@@ -168,8 +166,8 @@ public class ControllerTablero {
         System.out.println("Movimiento realizado: " + ficha.getClass().getSimpleName() +
                         " de (" + fichaElegida.getPos()[0] + ", " + 
                         fichaElegida.getPos()[1] 
-                        + ") a (" + destino.getPos()[0] + ", " 
-                        + destino.getPos()[1] + ").");
+                        + ") a (" + destino + ", " 
+                        + destino + ").");
         return true;
     }
 
