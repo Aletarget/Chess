@@ -1,6 +1,4 @@
 package com.app.Controller;
-import java.util.List;
-
 import com.app.EquipoBridge.EquipoBlanco;
 import com.app.EquipoBridge.EquipoNegro;
 import com.app.Fichas.Alfil;
@@ -121,29 +119,28 @@ public class ControllerTablero {
 
         System.out.println("El juego ha iniciado. ¡Buena suerte!");
     
-        return tableroInstancia; //Necesario para mostrarlo en pantalla.
-        // Configuración inicial adicional (si aplica)
+        return tableroInstancia;
     }
 
-    public boolean moverFicha(Casilla fichaElegida, Casilla destino){
-        // Validar que las coordenadas estén dentro del tablero
-        if (fichaElegida.getCasilla().getPos()[0] < 1 || fichaElegida.getCasilla().getPos()[0] > 8 || 
-            fichaElegida.getCasilla().getPos()[1] < 1 || fichaElegida.getCasilla().getPos()[1] > 8 ||
-            destino.getCasilla().getPos()[0] < 1 || destino.getCasilla().getPos()[0] > 8 ||
-            destino.getCasilla().getPos()[1] < 1 || destino.getCasilla().getPos()[1] > 8) {
-            System.out.println("Movimiento fuera de los límites del tablero.");
-            return false;
-        }
+    public boolean moverFicha(Ficha fichaElegida, Ficha destino){
 
-        // Obtener la ficha en la posición inicial
-        Ficha ficha = fichaElegida.getCasilla();
+        Ficha ficha = fichaElegida;
 
         // Verificar si hay una ficha en la posición inicial
         if (ficha == null) {
-            System.out.println("No hay ficha en la posición inicial (" + fichaElegida.getCasilla().getPos()[0] 
-            + ", " + fichaElegida.getCasilla().getPos()[1] + ").");
+            System.out.println("No hay ficha en la posición inicial");
             return false;
         }
+
+        // Validar que las coordenadas estén dentro del tablero
+        if (fichaElegida.getPos()[0] < 1 || fichaElegida.getPos()[0] > 8 || 
+            fichaElegida.getPos()[1] < 1 || fichaElegida.getPos()[1] > 8 ||
+            destino.getPos()[0] < 1 || destino.getPos()[0] > 8 ||
+            destino.getPos()[1] < 1 || destino.getPos()[1] > 8) {
+            System.out.println("Movimiento fuera de los límites del tablero.");
+            return false;
+        }
+        
 
         // Crear una instancia de la clase de movimiento correspondiente
         Movimientos movimiento;
@@ -164,15 +161,15 @@ public class ControllerTablero {
             return false;
         }
         //Mostrar la lista de movimientos disponibles
-        List<int[]> lista_mov = movimiento.movimiento(ficha);
+        //List<int[]> lista_mov = movimiento.movimiento(ficha);
 
         
 
         System.out.println("Movimiento realizado: " + ficha.getClass().getSimpleName() +
-                        " de (" + fichaElegida.getCasilla().getPos()[0] + ", " + 
-                        fichaElegida.getCasilla().getPos()[1] 
-                        + ") a (" + destino.getCasilla().getPos()[0] + ", " 
-                        + destino.getCasilla().getPos()[1] + ").");
+                        " de (" + fichaElegida.getPos()[0] + ", " + 
+                        fichaElegida.getPos()[1] 
+                        + ") a (" + destino.getPos()[0] + ", " 
+                        + destino.getPos()[1] + ").");
         return true;
     }
 
