@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import com.app.Controller.Casilla;
 import com.app.Controller.ControllerTablero;
 import com.app.Tablero.TableroJuego;
 
@@ -18,6 +19,8 @@ public class Tablero extends JPanel {
     private ControllerTablero controller;
     private JButton[][] imagen;
     private Boolean selec = false;
+    private Casilla fichaOrigen;
+    private Casilla fichaDestino;
     private JButton currentSelect;
     public Tablero(){
         setLayout(new GridLayout(8, 8));
@@ -45,14 +48,34 @@ public class Tablero extends JPanel {
                     for (int columna = 0; columna < 8; columna++) {
                         //Esta comparacion lo que hace es ver si el objeto anadido en imagen[fila][columna].addActionListener(buttonListener)
                         //es el mismo que el creado en el objeto JButon[x][y]
-                        if (e.getSource() == imagen[fila][columna]) 
-                        {
-                            if (tableroJuego.getTablero()[fila][columna].getCasilla() != null) {
-                                System.out.println("La ficha seleccionada es: "+tableroJuego.getTablero()[fila][columna].getCasilla()+" en: fila "+ fila+ ", columna "+columna);
-                                selec = true;
-                                currentSelect = imagen[fila][columna];
+                        if (e.getSource() == imagen[fila][columna]){
+                            Casilla botonElegido = tableroJuego.getTablero()[fila][columna];
+                            boolean validacion = controller.moverFicha(fichaOrigen, fichaDestino);
+                            if(!selec){
+                                if (validacion) {
+                                    System.out.println("La ficha seleccionada es: "+ botonElegido +" en: fila "+ fila+ ", columna "+columna);
+                                    selec = true;
+                                    fichaOrigen = botonElegido;
+                                    currentSelect = imagen[fila][columna];
+                                }else{
+                                    System.out.println("error, ficha nula");
+                                    botonElegido.limpiarBoton();
+                                    
+                                }
+                            }else{
+                                System.out.println("Intentando mover " + fichaOrigen + " a fila " + fila + ", columna " + columna);
+
+                                fichaDestino = botonElegido;
+                                
+
+                                if(validacion){
+                                    fichaOrigen = fichaDestino;
+                                }else{
+                                    System.out.println("El movimiento no ha sido elegido dentro de las posibilidades");
+                                }
+
                             }
-                        }
+                        }   
                     }
                 }
             }
@@ -61,7 +84,7 @@ public class Tablero extends JPanel {
 
 
 
-
+        //Agrega un boton por cada casilla dentro de tableroJuego
         for (int fila = 0; fila < 8; fila++) {
             for (int columna = 0; columna < 8; columna++) {
                 JPanel cell = new JPanel(new BorderLayout());
