@@ -8,6 +8,13 @@ import com.app.Fichas.Peon;
 import com.app.Fichas.Reina;
 import com.app.Fichas.Rey;
 import com.app.Fichas.Torre;
+import com.app.Movimientos.MovAlfil;
+import com.app.Movimientos.MovCaballo;
+import com.app.Movimientos.MovPeon;
+import com.app.Movimientos.MovReina;
+import com.app.Movimientos.MovRey;
+import com.app.Movimientos.MovTorre;
+import com.app.Movimientos.Movimientos;
 import com.app.Tablero.TableroJuego;
 
 public class ControllerTablero {
@@ -117,11 +124,10 @@ public class ControllerTablero {
 
     public boolean moverFicha(Ficha fichaElegida, Ficha destino){
 
-        String ficha = fichaElegida.getTipo();
-        System.out.println(ficha);
+        Ficha ficha = fichaElegida;
 
         // Verificar si hay una ficha en la posición inicial
-        /*if (ficha == null) {
+        if (ficha == null) {
             System.out.println("No hay ficha en la posición inicial");
             return false;
         }
@@ -155,15 +161,15 @@ public class ControllerTablero {
             return false;
         }
         //Mostrar la lista de movimientos disponibles
-        List<int[]> lista_mov = movimiento.movimiento(ficha);
+        //List<int[]> lista_mov = movimiento.movimiento(ficha);
 
         
 
         System.out.println("Movimiento realizado: " + ficha.getClass().getSimpleName() +
-                        " de (" + fichaElegida.getCasilla().getPos()[0] + ", " + 
-                        fichaElegida.getCasilla().getPos()[1] 
-                        + ") a (" + destino.getCasilla().getPos()[0] + ", " 
-                        + destino.getCasilla().getPos()[1] + ").");*/
+                        " de (" + fichaElegida.getPos()[0] + ", " + 
+                        fichaElegida.getPos()[1] 
+                        + ") a (" + destino.getPos()[0] + ", " 
+                        + destino.getPos()[1] + ").");
         return true;
     }
 
