@@ -122,7 +122,7 @@ public class ControllerTablero {
         return tableroInstancia;
     }
 
-    public boolean moverFicha(Ficha fichaElegida, Casilla destino){
+    public boolean moverFicha(Ficha fichaElegida, int fila, int columna){
 
         Ficha ficha = fichaElegida;
 
@@ -166,8 +166,8 @@ public class ControllerTablero {
         System.out.println("Movimiento realizado: " + ficha.getClass().getSimpleName() +
                         " de (" + fichaElegida.getPos()[0] + ", " + 
                         fichaElegida.getPos()[1] 
-                        + ") a (" + destino + ", " 
-                        + destino + ").");
+                        + ") a (" + (fila+1) + ", " 
+                        + (columna+1) + ").");
         return true;
     }
 
