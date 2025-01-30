@@ -126,20 +126,6 @@ public class ControllerTablero {
 
         Ficha ficha = fichaElegida;
 
-        // Verificar si hay una ficha en la posición inicial
-        if (ficha == null) {
-            System.out.println("No hay ficha en la posición inicial");
-            return false;
-        }
-
-        // Validar que las coordenadas estén dentro del tablero
-        if (fichaElegida.getPos()[0] < 1 || fichaElegida.getPos()[0] > 8 || 
-            fichaElegida.getPos()[1] < 1 || fichaElegida.getPos()[1] > 8) {
-            System.out.println("Movimiento fuera de los límites del tablero.");
-            return false;
-        }
-        
-
         // Crear una instancia de la clase de movimiento correspondiente
         Movimientos movimiento;
         if (ficha instanceof Peon) {
