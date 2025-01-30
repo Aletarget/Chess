@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 
 import com.app.Controller.Casilla;
 import com.app.Controller.ControllerTablero;
+import com.app.Fichas.Ficha;
 import com.app.Tablero.TableroJuego;
 
 public class Tablero extends JPanel {
@@ -19,8 +20,8 @@ public class Tablero extends JPanel {
     private ControllerTablero controller;
     private JButton[][] imagen;
     private Boolean selec = false;
-    private Casilla fichaOrigen;
-    private Casilla fichaDestino;
+    private Ficha fichaOrigen;
+    private Ficha fichaDestino;
     private JButton currentSelect;
     public Tablero(){
         setLayout(new GridLayout(8, 8));
@@ -50,26 +51,25 @@ public class Tablero extends JPanel {
                         //es el mismo que el creado en el objeto JButon[x][y]
                         if (e.getSource() == imagen[fila][columna]){
                             Casilla botonElegido = tableroJuego.getTablero()[fila][columna];
-                            boolean validacion = controller.moverFicha(fichaOrigen, fichaDestino);
+
                             if(!selec){
-                                if (validacion) {
-                                    System.out.println("La ficha seleccionada es: "+ botonElegido +" en: fila "+ fila+ ", columna "+columna);
+                                if (botonElegido.getCasilla() != null) {
+                                    System.out.println("La ficha seleccionada es: "+ botonElegido.getCasilla() +" en: fila "+ fila+ ", columna "+columna);
                                     selec = true;
-                                    fichaOrigen = botonElegido;
+                                    fichaOrigen = botonElegido.getCasilla();
                                     currentSelect = imagen[fila][columna];
                                 }else{
-                                    System.out.println("error, ficha nula");
-                                    botonElegido.limpiarBoton();
-                                    
+                                    System.out.println("boton nulo");
                                 }
                             }else{
                                 System.out.println("Intentando mover " + fichaOrigen + " a fila " + fila + ", columna " + columna);
 
-                                fichaDestino = botonElegido;
-                                
+                                fichaDestino = botonElegido.getCasilla();
+                                boolean validacion = controller.moverFicha(fichaOrigen, fichaDestino);
 
                                 if(validacion){
                                     fichaOrigen = fichaDestino;
+                                    System.out.println("el movimiento se ha hecho");
                                 }else{
                                     System.out.println("El movimiento no ha sido elegido dentro de las posibilidades");
                                 }
