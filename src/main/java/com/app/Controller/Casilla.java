@@ -37,19 +37,15 @@ public class Casilla implements Tablero {
     @Override
     public void fillCasilla(Ficha ficha) {
         this.ficha = ficha;
+        this.imagen.setIcon(new ImageIcon(getClass().getResource(ficha.getImg())));
     }
     @Override
     public void cleanCasilla() {
         this.ficha = null;
+        imagen.setIcon(null);
     }
     public JButton getBoton(){
         return imagen;
-    }
-    public void limpiarBoton(){
-        imagen.setIcon(null);
-    }
-    public void setBoton(){
-        
     }
     
 }
