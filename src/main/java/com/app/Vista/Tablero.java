@@ -65,15 +65,16 @@ public class Tablero extends JPanel {
                                 System.out.println("Intentando mover " + fichaOrigen + " a fila " + fila + ", columna " + columna);
 
                                 fichaDestino = botonElegido;
-                                boolean validacion = controller.moverFicha(fichaOrigen, fichaDestino);
+                                boolean validacion = controller.moverFicha(fichaOrigen, fila, columna);
 
                                 if(validacion){
                                     fichaOrigen = fichaDestino.getCasilla();
                                     System.out.println("el movimiento se ha hecho");
+                                    selec = !selec;
                                 }else{
                                     System.out.println("El movimiento no ha sido elegido dentro de las posibilidades");
                                 }
-
+                                
                             }
                         }   
                     }
