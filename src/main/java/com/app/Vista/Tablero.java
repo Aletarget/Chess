@@ -23,6 +23,7 @@ public class Tablero extends JPanel {
     private Ficha fichaOrigen;
     private Casilla fichaDestino;
     private JButton currentSelect;
+    private String Turno;
     public Tablero(){
         setLayout(new GridLayout(8, 8));
         setPreferredSize(new Dimension(800,800));
@@ -58,23 +59,32 @@ public class Tablero extends JPanel {
                                     selec = true;
                                     fichaOrigen = botonElegido.getCasilla();
                                     currentSelect = imagen[fila][columna];
+
                                 }else{
-                                    System.out.println("boton nulo");
+                                    System.out.println("Boton nulo");
                                 }
-                            }else{
+
+                            }else if(e.getSource() != currentSelect && selec){
                                 System.out.println("Intentando mover " + fichaOrigen + " a fila " + fila + ", columna " + columna);
 
                                 fichaDestino = botonElegido;
+                                // Usamos la fila y columna en vez de la casilla como tal ya que si la ficha es nula no se puede acceder a su informacion de posicion
                                 boolean validacion = controller.moverFicha(fichaOrigen, fila, columna);
-
                                 if(validacion){
                                     fichaOrigen = fichaDestino.getCasilla();
                                     System.out.println("el movimiento se ha hecho");
                                     selec = !selec;
+                                    fichaOrigen = new Casilla(null).getCasilla();
                                 }else{
                                     System.out.println("El movimiento no ha sido elegido dentro de las posibilidades");
+                                    selec = !selec;
+                                    fichaOrigen = new Casilla(null).getCasilla();
                                 }
                                 
+                            }else if(selec && e.getSource() == currentSelect){ //Codigo para dejar de seleccionar una ficha, dandole nuevamente a esta misma.
+                                System.out.println("HAS DEJADO DE SELECCIONAR LA FICHA");
+                                fichaOrigen = new Casilla(null).getCasilla();
+                                selec = !selec;
                             }
                         }   
                     }
@@ -105,9 +115,6 @@ public class Tablero extends JPanel {
 
             }
         }
-        
-        
-
     }
 
 }
