@@ -26,8 +26,8 @@ public class Tablero extends JPanel {
     private String Turno;
     public Tablero(){
         setLayout(new GridLayout(8, 8));
-        setPreferredSize(new Dimension(800,800));
-        setMaximumSize(new Dimension(800,800));
+        setPreferredSize(new Dimension(600,600));
+        setMaximumSize(new Dimension(600,600));
         // Colores para las casillas
         Color lightColor = new Color(253, 235, 208);
         Color darkColor = new Color(76,195,105);
