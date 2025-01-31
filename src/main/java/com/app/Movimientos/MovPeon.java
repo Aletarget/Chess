@@ -25,7 +25,6 @@ public class MovPeon implements Movimientos{
         }
         
         // Caso especial en el que el peon puede avanzar dos casillas si es el primer movimiento de la ficha
-        System.out.println(tablero.getTablero()[currentPosPeon[0]-2][posObjetivo[1]-1].getCasilla());
         if (equipo.equals("Blanco")) {
             if (posObjetivo[0] == currentPosPeon[0]-2 && ficha.getPrimerMov() == false && posObjetivo[1] == currentPosPeon[1]
                 //Condicion para que solo se pueda mover unicamente si las dos casillas de enfrente esten vacias
