@@ -57,7 +57,6 @@ public class MovPeon implements Movimientos{
         return false;
 
     }
-
     public Boolean validarMovimientos(int[][] movimientos, Ficha ficha, TableroJuego tablero, int fila, int columna, String valEqContrario){
         int[] currentPosPeon = ficha.getPos();
         int[] posObjetivo = new int[]{fila+1,columna+1}; 
@@ -67,18 +66,23 @@ public class MovPeon implements Movimientos{
             
             filaCurrent += movimiento[0];
             columnaCurrent += movimiento[1];
-            if (currentPosPeon[1] != columnaCurrent && tablero.getTablero()[fila][columna].getCasilla().getColor().equals(valEqContrario)) {
-                tablero.getTablero()[currentPosPeon[0]-1][currentPosPeon[1]-1].getCasilla().cambiarPrimerMov();
-                tablero.getTablero()[filaCurrent-1][columnaCurrent-1].fillCasilla(ficha, posObjetivo);
-                tablero.getTablero()[currentPosPeon[0]-1][currentPosPeon[1]-1].cleanCasilla();
-                return true;
-            }
-            if (filaCurrent == posObjetivo[0] && columnaCurrent == currentPosPeon[1]) { //Comprueba si el movimiento es posible
-                if(tablero.getTablero()[fila][columna].getCasilla() == null) {
-                    tablero.getTablero()[currentPosPeon[0]-1][currentPosPeon[1]-1].getCasilla().cambiarPrimerMov();
-                    tablero.getTablero()[filaCurrent-1][columnaCurrent-1].fillCasilla(ficha, posObjetivo);
-                    tablero.getTablero()[currentPosPeon[0]-1][currentPosPeon[1]-1].cleanCasilla();
-                    return true;
+            if (filaCurrent == posObjetivo[0] && columnaCurrent == posObjetivo[1]) {
+
+                if (columnaCurrent != currentPosPeon[1]) {
+                    if (tablero.getTablero()[filaCurrent-1][columnaCurrent-1].getCasilla()!= null && tablero.getTablero()[filaCurrent-1][columnaCurrent-1].getCasilla().getColor().equals(valEqContrario)) {
+                        
+                        tablero.getTablero()[currentPosPeon[0]-1][currentPosPeon[1]-1].getCasilla().cambiarPrimerMov();
+                        tablero.getTablero()[filaCurrent-1][columnaCurrent-1].fillCasilla(ficha, posObjetivo);
+                        tablero.getTablero()[currentPosPeon[0]-1][currentPosPeon[1]-1].cleanCasilla();
+                        return true;
+                    }
+                }else if(columnaCurrent == currentPosPeon[1]){
+                    if (tablero.getTablero()[filaCurrent-1][columnaCurrent-1].getCasilla() == null) {
+                        tablero.getTablero()[currentPosPeon[0]-1][currentPosPeon[1]-1].getCasilla().cambiarPrimerMov();
+                        tablero.getTablero()[filaCurrent-1][columnaCurrent-1].fillCasilla(ficha, posObjetivo);
+                        tablero.getTablero()[currentPosPeon[0]-1][currentPosPeon[1]-1].cleanCasilla();
+                        return true;
+                    }
                 }
             }
         }
