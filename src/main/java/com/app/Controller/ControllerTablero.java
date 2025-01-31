@@ -14,7 +14,6 @@ import com.app.Movimientos.MovPeon;
 import com.app.Movimientos.MovReina;
 import com.app.Movimientos.MovRey;
 import com.app.Movimientos.MovTorre;
-import com.app.Movimientos.Movimientos;
 import com.app.Tablero.TableroJuego;
 
 public class ControllerTablero {
@@ -124,22 +123,21 @@ public class ControllerTablero {
 
     public boolean moverFicha(Ficha fichaElegida, int fila, int columna){
 
-        Ficha ficha = fichaElegida;
 
         // Crear una instancia de la clase de movimiento correspondiente
-        Movimientos movimiento;
-        if (ficha instanceof Peon) {
-            movimiento = new MovPeon();
-        } else if (ficha instanceof Torre) {
-            movimiento = new MovTorre();
-        } else if (ficha instanceof Caballo) {
-            movimiento = new MovCaballo();
-        } else if (ficha instanceof Alfil) {
-            movimiento = new MovAlfil();
-        } else if (ficha instanceof Reina) {
-            movimiento = new MovReina();
-        } else if (ficha instanceof Rey) {
-            movimiento = new MovRey();
+        Boolean movimiento;
+        if (fichaElegida instanceof Peon) {
+            movimiento = new MovPeon().movimiento(fichaElegida, tableroInstancia ,fila, columna);
+        } else if (fichaElegida instanceof Torre) {
+            movimiento = new MovTorre().movimiento(fichaElegida, tableroInstancia, fila, columna);
+        } else if (fichaElegida instanceof Caballo) {
+            movimiento = new MovCaballo().movimiento(fichaElegida, tableroInstancia, fila, columna);
+        } else if (fichaElegida instanceof Alfil) {
+            movimiento = new MovAlfil().movimiento(fichaElegida, tableroInstancia, fila, columna);
+        } else if (fichaElegida instanceof Reina) {
+            movimiento = new MovReina().movimiento(fichaElegida, tableroInstancia, fila, columna);
+        } else if (fichaElegida instanceof Rey) {
+            movimiento = new MovRey().movimiento(fichaElegida, tableroInstancia, fila, columna);
         } else {
             System.out.println("Tipo de ficha desconocido.");
             return false;
@@ -149,12 +147,12 @@ public class ControllerTablero {
 
         
 
-        System.out.println("Movimiento realizado: " + ficha.getClass().getSimpleName() +
+        System.out.println("Movimiento realizado: " + fichaElegida.getClass().getSimpleName() +
                         " de (" + fichaElegida.getPos()[0] + ", " + 
                         fichaElegida.getPos()[1] 
                         + ") a (" + (fila+1) + ", " 
                         + (columna+1) + ").");
-        return true;
+        return movimiento;
     }
 
     public Casilla[][] getPiezasEquipo() {

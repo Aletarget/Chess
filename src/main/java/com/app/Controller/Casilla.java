@@ -35,8 +35,9 @@ public class Casilla implements Tablero {
         return ficha;
     }
     @Override
-    public void fillCasilla(Ficha ficha) {
+    public void fillCasilla(Ficha ficha, int[] pos) {
         this.ficha = ficha;
+        this.ficha.setPos(pos);
         this.imagen.setIcon(new ImageIcon(getClass().getResource(ficha.getImg())));
     }
     @Override
