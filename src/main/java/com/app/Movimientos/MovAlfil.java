@@ -1,30 +1,46 @@
 package com.app.Movimientos;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.app.Fichas.Ficha;
 import com.app.Tablero.TableroJuego;
 
 public class MovAlfil implements Movimientos{
     @Override
     public Boolean movimiento(Ficha ficha, TableroJuego tablero, int fila, int columna) {
-        List<int[]> posiblesMovimientos = new ArrayList<>();
+       int[] currentPosAlfil = ficha.getPos();
+       int[] posDestino = new int[]{fila, columna};
+       String equipo = ficha.getColor();
+       String valEqContrario;
+       //Creamos un validador de equipo para validar si puede ir a una casilla que no esté vacia.
+       if (equipo.equals("Blanco")) {
+           valEqContrario = "Negro";
+       }else{
+           valEqContrario = "Blanco";
+       }
         int[][] direcciones = {
             {1, 1}, {1, -1}, {-1, 1}, {-1, -1}
         };
         
         for (int[] direccion : direcciones) {
-            for (int i = 1; i < 8; i++) {  // Máximo 7 movimientos en una dirección dentro del tablero
-                int[] nuevaPos = {
-                    ficha.getPos()[0] + direccion[0] * i,
-                    ficha.getPos()[1] + direccion[1] * i
-                };
-                // Comprobamos que la nueva posición está dentro del tablero
-                if (nuevaPos[0] >= 0 && nuevaPos[0] < 8 && nuevaPos[1] >= 0 && nuevaPos[1] < 8) {
-                    posiblesMovimientos.add(nuevaPos);
-                } else {
-                    break; // Sale del tablero, no hay más movimientos en esta dirección
+            int currentFila = currentPosAlfil[0];
+            int currentColumna = currentPosAlfil[1];
+
+            for (int i = 0; i < 8; i++) {
+                currentFila = direccion[0] * i;
+                currentColumna = direccion[1] * i;
+                if (tablero.getTablero()[fila][columna].getCasilla() == null) {
+                    if (tablero.getTablero()[currentFila][currentColumna].getCasilla().getColor().equals(ficha.getColor())) {
+                        System.out.println("El movimiento no es posible realizarlo debido a que hay una ficha del mismo color en el camino");
+                        return false;
+                    }else{
+                        if (tablero.getTablero()[fila][columna].getCasilla().getColor().equals(valEqContrario)) {
+                            //logica de eliminar la ficha que esta en esa posic
+                        }
+                        tablero.getTablero()[currentFila][currentColumna].fillCasilla(ficha, posDestino);
+                        tablero.getTablero()[currentPosAlfil[0]][currentPosAlfil[1]].cleanCasilla();
+                        return true;
+                    }
+                    
+                    
                 }
             }
         }

@@ -31,7 +31,9 @@ public class MovCaballo implements Movimientos{
                 columnaCurrent += movimiento[1];
 
                 if (filaCurrent == posObjetivo[0] && columnaCurrent == posObjetivo[1]) { //Comprueba si el movimiento es posible
-                    if (tablero.getTablero()[fila][columna].getCasilla() == null || tablero.getTablero()[fila][columna].getCasilla().getColor().equals(valEqContrario)) {
+                    if (tablero.getTablero()[fila][columna].getCasilla() == null || 
+                        tablero.getTablero()[fila][columna].getCasilla().getColor().equals(valEqContrario)) {
+                            
                         tablero.getTablero()[filaCurrent-1][columnaCurrent-1].fillCasilla(ficha, posObjetivo);
                         tablero.getTablero()[currentPosCaballo[0]-1][currentPosCaballo[1]-1].cleanCasilla();
                         return true;

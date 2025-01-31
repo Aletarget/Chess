@@ -146,12 +146,14 @@ public class ControllerTablero {
         //List<int[]> lista_mov = movimiento.movimiento(ficha);
 
         
-
-        System.out.println("Movimiento realizado: " + fichaElegida.getClass().getSimpleName() +
+        if (movimiento){
+            System.out.println("Movimiento realizado: " + fichaElegida.getClass().getSimpleName() +
                         " de (" + fichaElegida.getPos()[0] + ", " + 
                         fichaElegida.getPos()[1] 
                         + ") a (" + (fila+1) + ", " 
                         + (columna+1) + ").");
+        }
+        
         return movimiento;
     }
 
