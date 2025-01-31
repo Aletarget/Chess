@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.app.Fichas.Ficha;
+import com.app.Tablero.TableroJuego;
 
 public class MovTorre implements Movimientos{
     @Override
-     public List<int[]> movimiento(Ficha ficha) {
+     public Boolean movimiento(Ficha ficha, TableroJuego tablero, int fila, int columna) {
         List<int[]> posiblesMovimientos = new ArrayList<>();
         int[][] direcciones = {
             {1, 0}, {-1, 0}, {0, 1}, {0, -1} // Movimiento horizontal y vertical
@@ -27,6 +28,6 @@ public class MovTorre implements Movimientos{
                 }
             }
         }
-        return posiblesMovimientos;
+        return true;
     }
 }

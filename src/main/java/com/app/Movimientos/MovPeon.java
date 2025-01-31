@@ -1,77 +1,91 @@
 package com.app.Movimientos;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import com.app.Fichas.Ficha;
+import com.app.Tablero.TableroJuego;
 
 public class MovPeon implements Movimientos{
-    /*public int[] avanzar(Ficha ficha){
-        int[] currentPostPeon = peon.getPos();
-        if (peon.getColor().equals("Blanco")) {
-            currentPostPeon[0] -= 1;
-            
+    @Override
+    public Boolean movimiento(Ficha ficha, TableroJuego tablero, int fila, int columna) {
+        int[] currentPosPeon = ficha.getPos();
+        int[] posObjetivo = new int[]{fila+1,columna+1}; 
+        String equipo = ficha.getColor();
+        String valEqContrario;
+        int[][] movimientosB = {
+            {-1, 1}, {-1, -1}, {-1, 0}
+        };
+        int[][] movimientosN = {
+            {1, 1}, {1, -1}, {1, 0},
+        };
+        //Creamos un validador de equipo para validar si puede ir a una casilla que no esté vacia.
+        if (equipo.equals("Blanco")) {
+            valEqContrario = "Negro";
         }else{
-            currentPostPeon[0] += 1;
+            valEqContrario = "Blanco";
         }
-        return currentPostPeon;
-    } 
-    public int[] avanzarDoble(Peon peon){
-        int[] currentPostPeon = peon.getPos();
-        if (peon.getColor().equals("Blanco")) {
-            currentPostPeon[0] -= 2;
-            
-        }else{
-            currentPostPeon[0] += 2;
+        
+        // Caso especial en el que el peon puede avanzar dos casillas si es el primer movimiento de la ficha
+        System.out.println(tablero.getTablero()[currentPosPeon[0]-2][posObjetivo[1]-1].getCasilla());
+        if (equipo.equals("Blanco")) {
+            if (posObjetivo[0] == currentPosPeon[0]-2 && ficha.getPrimerMov() == false && posObjetivo[1] == currentPosPeon[1]
+                //Condicion para que solo se pueda mover unicamente si las dos casillas de enfrente esten vacias
+                && (tablero.getTablero()[currentPosPeon[0]-3][posObjetivo[1]-1].getCasilla() == null && tablero.getTablero()[currentPosPeon[0]-2][posObjetivo[1]-1].getCasilla() == null)) {
+                
+                tablero.getTablero()[currentPosPeon[0]-1][currentPosPeon[1]-1].getCasilla().cambiarPrimerMov();
+                tablero.getTablero()[posObjetivo[0]-1][posObjetivo[1]-1].fillCasilla(ficha, posObjetivo);
+                tablero.getTablero()[currentPosPeon[0]-1][currentPosPeon[1]-1].cleanCasilla();
+                return true;
+            }
+        }else if (equipo.equals("Negro")) {
+            if (posObjetivo[0] == currentPosPeon[0]+2 && ficha.getPrimerMov() == false && posObjetivo[1] == currentPosPeon[1]
+                //Condicion para que solo se pueda mover unicamente si las dos casillas de enfrente esten vacias
+                && (tablero.getTablero()[currentPosPeon[0]+1][posObjetivo[1]-1].getCasilla() == null && tablero.getTablero()[currentPosPeon[0]][posObjetivo[1]-1].getCasilla() == null)) {
+                
+                tablero.getTablero()[currentPosPeon[0]-1][currentPosPeon[1]-1].getCasilla().cambiarPrimerMov();
+                tablero.getTablero()[posObjetivo[0]-1][posObjetivo[1]-1].fillCasilla(ficha, posObjetivo);
+                tablero.getTablero()[currentPosPeon[0]-1][currentPosPeon[1]-1].cleanCasilla();
+                return true;
+            }
         }
-        return currentPostPeon;
+
+
+        if (equipo.equals("Blanco")) {
+            validarMovimientos(movimientosB, ficha, tablero, fila, columna, valEqContrario);
+        }else if (equipo.equals("Negro")) {
+            validarMovimientos(movimientosN, ficha, tablero, fila, columna, valEqContrario);
+        }
+        return false;
+
     }
 
-    public int[] matarDer(Peon peon){
-        int[] currentPostPeon = peon.getPos();
-        if (peon.getColor().equals("Blanco")) {
-            currentPostPeon[0] -= 1;
-            currentPostPeon[1] +=1;
+    public Boolean validarMovimientos(int[][] movimientos, Ficha ficha, TableroJuego tablero, int fila, int columna, String valEqContrario){
+        int[] currentPosPeon = ficha.getPos();
+        int[] posObjetivo = new int[]{fila+1,columna+1}; 
+        for (int[] movimiento : movimientos) {
+            int filaCurrent = currentPosPeon[0];
+            int columnaCurrent = currentPosPeon[1];
             
-        }else{
-            currentPostPeon[0] += 1;
-            currentPostPeon[1] += 1;            
+            filaCurrent += movimiento[0];
+            columnaCurrent += movimiento[1];
+            if (currentPosPeon[1] != columnaCurrent && tablero.getTablero()[fila][columna].getCasilla().getColor().equals(valEqContrario)) {
+                tablero.getTablero()[currentPosPeon[0]-1][currentPosPeon[1]-1].getCasilla().cambiarPrimerMov();
+                tablero.getTablero()[filaCurrent-1][columnaCurrent-1].fillCasilla(ficha, posObjetivo);
+                tablero.getTablero()[currentPosPeon[0]-1][currentPosPeon[1]-1].cleanCasilla();
+                return true;
+            }
+            if (filaCurrent == posObjetivo[0] && columnaCurrent == currentPosPeon[1]) { //Comprueba si el movimiento es posible
+                if(tablero.getTablero()[fila][columna].getCasilla() == null) {
+                    tablero.getTablero()[currentPosPeon[0]-1][currentPosPeon[1]-1].getCasilla().cambiarPrimerMov();
+                    tablero.getTablero()[filaCurrent-1][columnaCurrent-1].fillCasilla(ficha, posObjetivo);
+                    tablero.getTablero()[currentPosPeon[0]-1][currentPosPeon[1]-1].cleanCasilla();
+                    return true;
+                }
+            }
         }
-        return currentPostPeon;
-    } 
-    
-    public int[] matarIzq(Peon peon){
-        int[] currentPostPeon = peon.getPos();
-        if (peon.getColor().equals("Blanco")) {
-            currentPostPeon[0] -= 1;
-            currentPostPeon[1] -=1;
-            
-        }else{
-            currentPostPeon[0] += 1;
-            currentPostPeon[1] -= 1;            
-        }
-        return currentPostPeon;
-    }*/
-    @Override
-    public List<int[]> movimiento(Ficha ficha) {
-        List<int[]> posiblesMovimientos = new ArrayList<>();
-        int direccion = ficha.getColor().equals("Blanco") ? -1 : 1;
-
-        // Movimiento de avance simple
-        posiblesMovimientos.add(new int[]{ficha.getPos()[0] + direccion, ficha.getPos()[1]});
-
-        // Movimiento de avance doble (solo si está en posición inicial)
-        if ((ficha.getColor().equals("Blanco") && ficha.getPos()[0] == 6) || 
-            (ficha.getColor().equals("Negro") && ficha.getPos()[0] == 1)) {
-            posiblesMovimientos.add(new int[]{ficha.getPos()[0] + 2 * direccion, ficha.getPos()[1]});
-        }
-
-        // Captura en diagonal derecha
-        posiblesMovimientos.add(new int[]{ficha.getPos()[0] + direccion, ficha.getPos()[1] + 1});
-
-        // Captura en diagonal izquierda
-        posiblesMovimientos.add(new int[]{ficha.getPos()[0] + direccion, ficha.getPos()[1] - 1});
-
-        return posiblesMovimientos;
+        return false;   
     }
 }
+
+
+
+

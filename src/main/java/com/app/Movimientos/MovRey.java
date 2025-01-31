@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.app.Fichas.Ficha;
+import com.app.Tablero.TableroJuego;
 
 public class MovRey implements Movimientos{
     @Override
-    public List<int[]> movimiento(Ficha ficha) {
+    public Boolean movimiento(Ficha ficha, TableroJuego tablero, int fila, int columna) {
         List<int[]> posiblesMovimientos = new ArrayList<>();
         int[][] direcciones = {
             {1, 0}, {-1, 0}, {0, 1}, {0, -1},
@@ -24,6 +25,6 @@ public class MovRey implements Movimientos{
                 posiblesMovimientos.add(nuevaPos);
             }
         }
-        return posiblesMovimientos;
+        return true;
     }
 }
