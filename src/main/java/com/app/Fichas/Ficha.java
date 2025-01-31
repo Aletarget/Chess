@@ -7,6 +7,7 @@ public abstract class Ficha{
     private String Tipo;
     private String Img;
     private int[] pos;
+    private Boolean primerMov = false;
 
     public Ficha(Equipo Color, String Tipo, String Img, int[] pos){
         setColor(Color);
@@ -16,16 +17,16 @@ public abstract class Ficha{
     }
 
     //SETTERS
-    private void setColor(Equipo color) {
+    public void setColor(Equipo color) {
         Color = color;
     }
-    private void setImg(String img) {
+    public void setImg(String img) {
         Img = img;
     }
-    private void setTipo(String tipo) {
+    public void setTipo(String tipo) {
         Tipo = tipo;
     }
-    private void setPos(int[] pos) {
+    public void setPos(int[] pos) {
         this.pos = pos;
     }
 
@@ -41,5 +42,15 @@ public abstract class Ficha{
     }
     public int[] getPos() {
         return pos;
+    }
+
+    //Metodos exclusivos del peon
+    public void cambiarPrimerMov(){
+        if (primerMov == false) {
+            primerMov = true;
+        }
+    }
+    public Boolean getPrimerMov(){
+        return primerMov;
     }
 }
