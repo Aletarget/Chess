@@ -25,19 +25,16 @@ public class MovTorre implements Movimientos{
         for (int[] direccion : direcciones) {
             int filaCurrent = currentPosTorre[0]-1;
             int columnaCurrent = currentPosTorre[1]-1;
-            int i;
             bucle = true;
             while(bucle) {
                 // Calcular la nueva posición
                 if (currentPosTorre[0] == posObjetivo[0]) {
                     columnaCurrent += direccion[1];  
-                    System.out.println(columnaCurrent+ " "+direccion[0]);
                     if (columnaCurrent > 7 || columnaCurrent < 0 || direccion[1] == 0) {
                         bucle = false;
                     }
                 }else if (currentPosTorre[1] == posObjetivo[1]) {
                     filaCurrent += direccion[0];
-                    System.out.println(filaCurrent + " "+direccion[0] );
                     if (filaCurrent > 7 || filaCurrent < 0 || direccion[0] == 0) {
                         bucle = false;
                     }
