@@ -169,7 +169,4 @@ public class ControllerTablero {
         return piezasEquipoNegro;
     }
     
-
-    
-    
 }
