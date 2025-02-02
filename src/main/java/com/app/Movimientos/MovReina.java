@@ -15,7 +15,7 @@ public class MovReina implements Movimientos{
         if (equipo.equals("Blanco")) {
             valEqContrario = "Negro";
         }else{
-            valEqContrario = "Negro";
+            valEqContrario = "Blanco";
         }
         
         // Direcciones posibles (vertical, horizontal y diagonal)
