@@ -26,8 +26,8 @@ public class Tablero extends JPanel {
     private String Turno;
     public Tablero(){
         setLayout(new GridLayout(8, 8));
-        setPreferredSize(new Dimension(600,600));
-        setMaximumSize(new Dimension(600,600));
+        setPreferredSize(new Dimension(800,800));
+        setMaximumSize(new Dimension(800,800));
         // Colores para las casillas
         Color lightColor = new Color(253, 235, 208);
         Color darkColor = new Color(76,195,105);
@@ -72,11 +72,10 @@ public class Tablero extends JPanel {
                                 boolean validacion = controller.moverFicha(fichaOrigen, fila, columna);
                                 if(validacion){
                                     fichaOrigen = fichaDestino.getCasilla();
-                                    System.out.println("el movimiento se ha hecho");
+                                    System.out.println("El movimiento se ha hecho");
                                     selec = !selec;
                                     fichaOrigen = new Casilla(null).getCasilla();
                                 }else{
-                                    System.out.println("El movimiento no ha sido elegido dentro de las posibilidades");
                                     selec = !selec;
                                     fichaOrigen = new Casilla(null).getCasilla();
                                 }
