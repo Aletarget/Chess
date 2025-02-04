@@ -2,23 +2,24 @@ package com.app.state;
 
 import com.app.Fichas.Ficha;
 
-public class stateJaque extends state{
-
-    public stateJaque(Ficha rey){
+public class stateNoAmenaza extends state {
+    stateNoAmenaza(Ficha rey){
         super(rey);
     }
+
     @Override
     public void jaque(Ficha rey) {
-        state = "Jaque";
+        state = null;
     }
 
     @Override
     public void jaqueMate(Ficha rey) {
         state = null;
     }
+
     @Override
     public void sinAmenaza(Ficha rey) {
-        state = null;
+        state = "SinAmenaza";
     }
     
 }
