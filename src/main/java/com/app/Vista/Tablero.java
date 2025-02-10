@@ -124,5 +124,7 @@ public class Tablero extends JPanel {
             }
         }
     }
-
+    public String getTurno(){
+        return Turno;
+    }
 }

@@ -2,7 +2,7 @@ package com.app;
 
 import javax.swing.SwingUtilities;
 
-import com.app.Vista.MainWindow;
+import com.app.Vista.ChessMenu;
 
 /**
  * Hello world!
@@ -16,7 +16,7 @@ public class App
 
             @Override
             public void run() {
-                new MainWindow();
+                new ChessMenu();
             }
 
         });

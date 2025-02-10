@@ -15,15 +15,15 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class MainWindow extends JFrame {
-
     private Tablero tablero; 
 
-    public MainWindow(){
+    public MainWindow(JFrame menu){
         setLayout(new FlowLayout());
         setSize(new Dimension(1600,900));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("CHESS");
         getContentPane().setBackground(Color.DARK_GRAY);
+        setLocationRelativeTo(null); // Centrar ventana
 
 
         // Crear el panel central redondeado
@@ -47,11 +47,11 @@ public class MainWindow extends JFrame {
         panelCentral.add(Box.createVerticalGlue());
         panelCentral.add(tablero);
         panelCentral.add(Box.createVerticalGlue());
-
+        
         // Añadir el panel central al centro del BorderLayout
         add(panelCentral, BorderLayout.CENTER);
+        add(new panelLateral(menu, this, tablero), BorderLayout.EAST);
 
         setVisible(true);
     }
-
 }
