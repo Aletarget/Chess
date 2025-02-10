@@ -6,19 +6,20 @@ public class stateJaque extends state{
 
     public stateJaque(Ficha rey){
         super(rey);
+        jaque();
     }
     @Override
-    public void jaque(Ficha rey) {
-        state = "Jaque";
+    public String jaque() {
+        return state = "Jaque";
     }
 
     @Override
-    public void jaqueMate(Ficha rey) {
-        state = null;
+    public String jaqueMate() {
+        return state = null;
     }
     @Override
-    public void sinAmenaza(Ficha rey) {
-        state = null;
+    public String sinAmenaza() {
+        return state = null;
     }
     
 }

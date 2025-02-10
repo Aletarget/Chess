@@ -14,6 +14,7 @@ import com.app.Controller.Casilla;
 import com.app.Controller.ControllerTablero;
 import com.app.Fichas.Ficha;
 import com.app.Tablero.TableroJuego;
+import com.app.state.*;
 
 public class Tablero extends JPanel {
     private TableroJuego tableroJuego;
@@ -23,7 +24,13 @@ public class Tablero extends JPanel {
     private Ficha fichaOrigen;
     private Casilla fichaDestino;
     private JButton currentSelect;
-    private String Turno;
+
+    private String Turno = "Blanco";
+
+    //Implementacion de estados para ambos reyes
+    private state estadoReyNegro;
+    private state estadoReyBlanco;
+
     public Tablero(){
         setLayout(new GridLayout(8, 8));
         setPreferredSize(new Dimension(800,800));
@@ -52,9 +59,8 @@ public class Tablero extends JPanel {
                         //es el mismo que el creado en el objeto JButon[x][y]
                         if (e.getSource() == imagen[fila][columna]){
                             Casilla botonElegido = tableroJuego.getTablero()[fila][columna];
-
                             if(!selec){
-                                if (botonElegido.getCasilla() != null) {
+                                if (botonElegido.getCasilla() != null && botonElegido.getCasilla().getColor().equals(Turno)) {
                                     System.out.println("La ficha seleccionada es: "+ botonElegido.getCasilla() +" en: fila "+ fila+ ", columna "+columna);
                                     selec = true;
                                     fichaOrigen = botonElegido.getCasilla();
@@ -71,10 +77,13 @@ public class Tablero extends JPanel {
                                 // Usamos la fila y columna en vez de la casilla como tal ya que si la ficha es nula no se puede acceder a su informacion de posicion
                                 boolean validacion = controller.moverFicha(fichaOrigen, fila, columna);
                                 if(validacion){
+                                    checkOrChackemate test = new checkOrChackemate(tableroJuego, Turno, fichaOrigen);
                                     fichaOrigen = fichaDestino.getCasilla();
                                     System.out.println("El movimiento se ha hecho");
                                     selec = !selec;
                                     fichaOrigen = new Casilla(null).getCasilla();
+                                    Turno = Turno.equals("Blanco") ? "Negro" : "Blanco";
+                                    System.out.println(Turno);
                                 }else{
                                     selec = !selec;
                                     fichaOrigen = new Casilla(null).getCasilla();

@@ -5,21 +5,22 @@ import com.app.Fichas.Ficha;
 public class stateNoAmenaza extends state {
     stateNoAmenaza(Ficha rey){
         super(rey);
+        sinAmenaza();
     }
 
     @Override
-    public void jaque(Ficha rey) {
-        state = null;
+    public String jaque() {
+        return state = null;
     }
 
     @Override
-    public void jaqueMate(Ficha rey) {
-        state = null;
+    public String jaqueMate() {
+        return state = null;
     }
 
     @Override
-    public void sinAmenaza(Ficha rey) {
-        state = "SinAmenaza";
+    public String sinAmenaza() {
+        return state = "SinAmenaza";
     }
     
 }

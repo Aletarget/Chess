@@ -1,6 +1,9 @@
 package com.app.Movimientos;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.app.Fichas.Ficha;
 import com.app.Tablero.TableroJuego;
 
@@ -49,12 +52,11 @@ public class MovPeon implements Movimientos{
 
 
         if (equipo.equals("Blanco")) {
-            validarMovimientos(movimientosB, ficha, tablero, fila, columna, valEqContrario);
+            return validarMovimientos(movimientosB, ficha, tablero, fila, columna, valEqContrario);
         }else if (equipo.equals("Negro")) {
-            validarMovimientos(movimientosN, ficha, tablero, fila, columna, valEqContrario);
+            return validarMovimientos(movimientosN, ficha, tablero, fila, columna, valEqContrario);
         }
         return false;
-
     }
     public Boolean validarMovimientos(int[][] movimientos, Ficha ficha, TableroJuego tablero, int fila, int columna, String valEqContrario){
         int[] currentPosPeon = ficha.getPos();
@@ -87,6 +89,151 @@ public class MovPeon implements Movimientos{
         }
         return false;   
     }
+    @Override
+    public List<int[]> movDef(Ficha ficha, TableroJuego tablero) {
+        List<int[]> casAtq = new ArrayList<>();
+        int[] currentPosPeon = ficha.getPos();
+        String equipo = ficha.getColor();
+        String valEqContrario = equipo.equals("Blanco") ? "Negro" : "Blanco";
+
+        int[][] movimientosB = {
+            {-1, 1}, {-1, -1}
+        };
+        int[][] movimientosN = {
+            {1, 1}, {1, -1}
+        };
+
+        if (ficha.getColor().equals("Blanco")) {
+            for(int[] movimientoB : movimientosB){
+                int filaCurrent = currentPosPeon[0]-1;
+                int columnaCurrent = currentPosPeon[1]-1;
+        
+                filaCurrent += movimientoB[0];  
+                columnaCurrent += movimientoB[1];
+                
+                // Verificar si la nueva posición está dentro del tablero
+                if ((columnaCurrent <= 7 && columnaCurrent >= 0) && (filaCurrent <= 7 && filaCurrent >= 0)){
+                        // Validar si la casilla esta vacia o esta ocupada por una ficha enemiga, si es asi se agrega esa casilla a una posible a atacar
+                    if (tablero.getTablero()[filaCurrent][columnaCurrent].getCasilla() == null ) {
+                        casAtq.add(new int[]{filaCurrent,columnaCurrent});
+                    }else if (tablero.getTablero()[filaCurrent][columnaCurrent].getCasilla().getColor().equals(valEqContrario)) {
+                        casAtq.add(new int[]{filaCurrent,columnaCurrent});
+                        //Rompe el ciclo para ir con otra movimientosB ya que una pieza aliada se atraviesa
+                        break;
+                    }else if (tablero.getTablero()[filaCurrent][columnaCurrent].getCasilla().getColor().equals(tablero.getTablero()[currentPosPeon[0]-1][currentPosPeon[1]-1].getCasilla().getColor())) {
+                        //
+                        break;
+                    }
+                }
+            
+        
+            }
+        }else if(ficha.getColor().equals("Negro")){
+            for(int[] movimientoN : movimientosN){
+                int filaCurrent = currentPosPeon[0]-1;
+                int columnaCurrent = currentPosPeon[1]-1;
+                   
+                filaCurrent += movimientoN[0];  
+                columnaCurrent += movimientoN[1];
+        
+                // Verificar si la nueva posición está dentro del tablero
+                if ((columnaCurrent <= 7 && columnaCurrent >= 0) && (filaCurrent <= 7 && filaCurrent >= 0)) {
+                    
+                    // Validar si la casilla esta vacia o esta ocupada por una ficha enemiga, si es asi se agrega esa casilla a una posible a atacar
+                    if (tablero.getTablero()[filaCurrent][columnaCurrent].getCasilla() == null ) {
+                        casAtq.add(new int[]{filaCurrent,columnaCurrent});
+                        
+                    }else if (tablero.getTablero()[filaCurrent][columnaCurrent].getCasilla().getColor().equals(valEqContrario)) {
+                        casAtq.add(new int[]{filaCurrent,columnaCurrent});
+                        
+                        //Rompe el ciclo para ir con otra movimientosB ya que una pieza aliada se atraviesa
+                        break;
+                    }else if (tablero.getTablero()[filaCurrent][columnaCurrent].getCasilla().getColor().equals(tablero.getTablero()[currentPosPeon[0]-1][currentPosPeon[1]-1].getCasilla().getColor())) {
+                        //
+                        break;
+                    }
+                }
+            
+            }
+        }
+
+        return casAtq;
+    }
+    @Override
+    public List<int[]> movAtq(Ficha ficha, TableroJuego tablero, Integer[][] tableroDef) {
+        List<int[]> casAtq = new ArrayList<>();
+        int[] currentPosPeon = ficha.getPos();
+        String equipo = ficha.getColor();
+        String valEqContrario = equipo.equals("Blanco") ? "Negro" : "Blanco";
+
+        int[][] movimientosB = {
+            {-1, 1}, {-1, -1}
+        };
+        int[][] movimientosN = {
+            {1, 1}, {1, -1}
+        };
+
+        if (ficha.getColor().equals("Blanco")) {
+            for(int[] movimientoB : movimientosB){
+                int filaCurrent = currentPosPeon[0]-1;
+                int columnaCurrent = currentPosPeon[1]-1;
+        
+                filaCurrent += movimientoB[0];  
+                columnaCurrent += movimientoB[1];
+                
+                // Verificar si la nueva posición está dentro del tablero
+                if ((columnaCurrent <= 7 && columnaCurrent >= 0) && (filaCurrent <= 7 && filaCurrent >= 0)){
+                    if (tablero.getTablero()[filaCurrent][columnaCurrent].getCasilla() == null && tableroDef[filaCurrent][columnaCurrent].equals(1)) {
+                        casAtq.add(new int[]{filaCurrent,columnaCurrent});
+                    }else if(tablero.getTablero()[filaCurrent][columnaCurrent].getCasilla() == null){
+                        casAtq.add(new int[]{filaCurrent,columnaCurrent});
+                    
+                    }else if (tablero.getTablero()[filaCurrent][columnaCurrent].getCasilla().getColor().equals(valEqContrario) || tableroDef[filaCurrent][columnaCurrent].equals(1)) {
+                        casAtq.add(new int[]{filaCurrent,columnaCurrent});
+                        //Rompe el ciclo para ir con otra direccion ya que una pieza aliada se atraviesa
+                        break;
+                    }else if (tablero.getTablero()[filaCurrent][columnaCurrent].getCasilla().getColor().equals(tablero.getTablero()[currentPosPeon[0]-1][currentPosPeon[1]-1].getCasilla().getColor())) {
+                        //
+                        break;
+                    }
+                }
+            
+        
+            }
+        }else if(ficha.getColor().equals("Negro")){
+            for(int[] movimientoN : movimientosN){
+                int filaCurrent = currentPosPeon[0]-1;
+                int columnaCurrent = currentPosPeon[1]-1;
+                   
+                filaCurrent += movimientoN[0];  
+                columnaCurrent += movimientoN[1];
+        
+                // Verificar si la nueva posición está dentro del tablero
+                if ((columnaCurrent <= 7 && columnaCurrent >= 0) && (filaCurrent <= 7 && filaCurrent >= 0)) {
+                    
+                    // Validar si la casilla esta vacia o esta ocupada por una ficha enemiga, si es asi se agrega esa casilla a una posible a atacar
+                    if (tablero.getTablero()[filaCurrent][columnaCurrent].getCasilla() == null && tableroDef[filaCurrent][columnaCurrent].equals(1)) {
+                        casAtq.add(new int[]{filaCurrent,columnaCurrent});
+                    }else if(tablero.getTablero()[filaCurrent][columnaCurrent].getCasilla() == null){
+                        casAtq.add(new int[]{filaCurrent,columnaCurrent});
+                    
+                    }else if (tablero.getTablero()[filaCurrent][columnaCurrent].getCasilla().getColor().equals(valEqContrario) || tableroDef[filaCurrent][columnaCurrent].equals(1)) {
+                        casAtq.add(new int[]{filaCurrent,columnaCurrent});
+                        //Rompe el ciclo para ir con otra direccion ya que una pieza aliada se atraviesa
+                        break;
+                    }else if (tablero.getTablero()[filaCurrent][columnaCurrent].getCasilla().getColor().equals(tablero.getTablero()[currentPosPeon[0]-1][currentPosPeon[1]-1].getCasilla().getColor())) {
+                        //
+                        break;
+                    }
+                }
+            
+            }
+        }
+
+        return casAtq;
+    }
+    
+    
 }
 
 

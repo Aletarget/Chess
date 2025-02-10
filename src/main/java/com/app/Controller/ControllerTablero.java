@@ -87,7 +87,7 @@ public class ControllerTablero {
     }
     
     public TableroJuego iniciarJuego(){
-    
+        
         // Inicializar las piezas de ambos equipos
         Casilla[][] piezasEquipoBlanco = fichasBlancas();
         Casilla[][] piezasEquipoNegro = fichasNegras();
@@ -103,7 +103,6 @@ public class ControllerTablero {
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 8; j++) {
                 Casilla pieza = piezasEquipoNegro[i][j];
-                System.out.println(pieza.getCasilla().getImg());
                 colocarFicha(pieza.getCasilla().getPos()[0],pieza.getCasilla().getPos()[1],pieza.getCasilla());
             }
         }
@@ -117,7 +116,6 @@ public class ControllerTablero {
         }
 
         System.out.println("El juego ha iniciado. ¡Buena suerte!");
-    
         return tableroInstancia;
     }
 

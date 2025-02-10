@@ -1,5 +1,8 @@
 package com.app.Movimientos;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.app.Fichas.Ficha;
 import com.app.Tablero.TableroJuego;
 
@@ -43,5 +46,65 @@ public class MovCaballo implements Movimientos{
             }
         return false;
     }
+
+    @Override
+    public List<int[]> movDef(Ficha ficha, TableroJuego tablero) {
+        List<int[]> casAtq = new ArrayList<>();
+        int[] currentPosCaballo = ficha.getPos();
+        String equipo = ficha.getColor();
+        String valEqContrario = equipo.equals("Blanco") ? "Negro" : "Blanco";
+        int[][] movimientos = {
+            {2, 1}, {2, -1}, {-2, 1}, {-2, -1},
+            {1, 2}, {1, -2}, {-1, 2}, {-1, -2}
+        };
+        for (int[] movimiento : movimientos) {
+            int filaCurrent = currentPosCaballo[0]-1;
+            int columnaCurrent = currentPosCaballo[1]-1;
+            
+            filaCurrent += movimiento[0];
+            columnaCurrent += movimiento[1];
+            
+            if ((columnaCurrent <= 7 && columnaCurrent >= 0) && (filaCurrent <= 7 && filaCurrent >= 0)) {
+                if (tablero.getTablero()[filaCurrent][columnaCurrent].getCasilla() == null || 
+                    tablero.getTablero()[filaCurrent][columnaCurrent].getCasilla().getColor().equals(valEqContrario)) {
+                    casAtq.add(new int[]{filaCurrent,columnaCurrent});
+                    
+                }
+            }
+
+        }
+        return casAtq;
+    }
+
+    @Override
+    public List<int[]> movAtq(Ficha ficha, TableroJuego tablero, Integer[][] tableroDef) {
+        List<int[]> casAtq = new ArrayList<>();
+        int[] currentPosCaballo = ficha.getPos();
+        String equipo = ficha.getColor();
+        String valEqContrario = equipo.equals("Blanco") ? "Negro" : "Blanco";
+        int[][] movimientos = {
+            {2, 1}, {2, -1}, {-2, 1}, {-2, -1},
+            {1, 2}, {1, -2}, {-1, 2}, {-1, -2}
+        };
+        for (int[] movimiento : movimientos) {
+            int filaCurrent = currentPosCaballo[0]-1;
+            int columnaCurrent = currentPosCaballo[1]-1;
+            
+            filaCurrent += movimiento[0];
+            columnaCurrent += movimiento[1];
+            
+            if ((columnaCurrent <= 7 && columnaCurrent >= 0) && (filaCurrent <= 7 && filaCurrent >= 0)) {
+                if (tablero.getTablero()[filaCurrent][columnaCurrent].getCasilla() == null || 
+                    tablero.getTablero()[filaCurrent][columnaCurrent].getCasilla().getColor().equals(valEqContrario)) {
+                    casAtq.add(new int[]{filaCurrent,columnaCurrent});
+                    
+                }
+            }
+
+        }
+        return casAtq;
+    }
+    
+
 
 }
